@@ -85,10 +85,11 @@ def mapeamento_steps(cep='30000000', numero='01', dt_vencimento='não sei'):
                       'Consultor Indisponível': ['Os nossos consultores estão disponíveis das'],
                       'Finalização': ['Estamos finalizando o seu atendimento'],
                       'Já sou Cliente': ['Você já é nosso cliente?', 'Não'],
+                      'Tipo Endereço': ['Selecione o tipo do endereço', 'Casa'],
                       'Área Rural': ['em uma área rural', 'Não'],
                       'Condominio': ['localizado em um condomínio', 'Não'],
                       'CEP': ['digite o seu CEP', cep],
-                      'CEP2': ['digite seu CEP', cep],
+                      'CEP_2': ['digite seu CEP', cep],
                       'Número Ende.': ['o número do endereço', numero],
                       'Complemento': ['o complemento do endereço', 'não'],
                       'Referência': ['qual o ponto de referência do endereço', 'Não'],
@@ -180,9 +181,7 @@ def interacao_chat(navegador, operacao, CEP='30000000', num='01', dt_vencimento=
             tempo_erro = 0
 
         if chave_step in 'Oferta Planos':
-            sleep(2.5)
-        elif chave_step in 'Confirma Pedido ,Confirma Pedido2':
-            sleep(0.5)
+            sleep(3.5)
 
         try:
             navegador.find_element(By.ID, 'msg-textarea').send_keys(steps[chave_step][1], Keys.ENTER)
