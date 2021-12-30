@@ -46,7 +46,7 @@ def url_lps():
                      'BRISANET': ['https://ofertasbrisanet.com.br', '59607571', '241'],
                      'TELY': ['https://ofertastely.com.br/', '58038000', '315'],
                      'LIGUE': ['https://ofertasligue.net/', '87005002', '405'],
-                     'SUMICITY': ['https://ofertassumicity.com.br/', '27534240', '382'],
+                     'SUMICITY': ['https://ofertassumicity.com.br/', '29045224', '03'],
                      'VIP': ['https://ofertasvipbrtelecom.com.br/', '09415110', '16']
                      },
 
@@ -88,6 +88,7 @@ def mapeamento_steps(cep='30000000', numero='01', dt_vencimento='não sei'):
                       'Área Rural': ['em uma área rural', 'Não'],
                       'Condominio': ['localizado em um condomínio', 'Não'],
                       'CEP': ['digite o seu CEP', cep],
+                      'CEP2': ['digite seu CEP', cep],
                       'Número Ende.': ['o número do endereço', numero],
                       'Complemento': ['o complemento do endereço', 'não'],
                       'Referência': ['qual o ponto de referência do endereço', 'Não'],
