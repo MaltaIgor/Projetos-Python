@@ -100,6 +100,7 @@ def mapeamento_steps(cep='30000000', numero='01', dt_vencimento='não sei'):
                       'Confirma endereço': ['Está correto?', 'Sim'],
                       'Oferta Planos': ['Vamos escolher o melhor plano', 1],
                       'Oferta Planos_2': ['opções abaixo que melhor te atende', 1],
+                      'Mais_produtos': ['adicionar mais produtos', 'Agora não'],
                       'TV': ['adicionar TV', 'Não'],
                       'Tel Fixo': ['adicionar Telefone Fixo ao seu carrinho', 'Não'],
                       'Tel Móvel': ['adicionar Telefone Móvel ao seu carrinho', 'Não'],
