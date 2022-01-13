@@ -34,9 +34,9 @@ if __name__== "__main__":
  #   tree.root.right = Node(14)
 
 
- #   print(tree.root)
- #   print(tree.root.right)
-  #  print(tree.root.left)
+#   print(tree.root)
+#   print(tree.root.right)
+#  print(tree.root.left)
     tree = Binarytree()
     n1 = Node('a')
     n2 = Node('+')

@@ -23,3 +23,5 @@ if __name__ == "__main__":
     n2.right = n3
 
     tree.root = n2
+    tree.simetric_traversal()
+    print()
