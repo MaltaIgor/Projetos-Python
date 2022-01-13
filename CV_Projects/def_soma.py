@@ -1,6 +1,9 @@
 from random import randint
 
 def sorteia(lista):
+    """
+    docstring exemplo
+    """
     for cont in range (0,5):
         lista.append(randint(1,10))
 
@@ -20,3 +23,6 @@ numeros = list()
 sorteia(numeros)
 print(numeros)
 somapar(numeros)
+
+
+help(sorteia)
