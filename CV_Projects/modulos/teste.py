@@ -1,4 +1,4 @@
-import moeda
+from pacote import moeda
 
 p = float(input('digite o preço: R$'))
 print(f'A metade de {moeda.moeda(p)} é {moeda.metade(p,True)}')
