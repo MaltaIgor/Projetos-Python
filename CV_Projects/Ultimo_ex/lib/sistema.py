@@ -1,11 +1,17 @@
 
 from interface import *
 from time import sleep
+from arquivo import *
+
+arq = 'cadastros.txt'
+
+if not arquivoExiste(arq):
+    criarArquivo(arq)
 
 while True:
     resposta = menu(['Ver Pessoas Cadastradas','Cadastrar Nova Pessoa', 'Sair do Sistema'])
     if resposta == 1:
-        cabecalho('Opção 1')
+        lerArquivo(arq)
     elif resposta == 2:
         cabecalho('Opção 2')
     elif resposta == 3:
@@ -13,4 +19,4 @@ while True:
         break
     else:
         print('\033[31mERRO: Digite uma opção válida.\033[m' )
-    sleep(1)
+    sleep(2)
