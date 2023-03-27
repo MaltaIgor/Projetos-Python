@@ -89,3 +89,4 @@ def grafico(df):
 
 
 def analise_tecnica(ativo):
+    print(teste)

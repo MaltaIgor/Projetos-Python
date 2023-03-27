@@ -7,9 +7,9 @@ def consumer():
     df_final = pd.DataFrame()
     for ativo in symbol_list_ibrx:
         if(ativo in x):
-            chamada_api = yf.Ticker("PETR4.SA").history(period='1wk')
+            chamada_api = yf.Ticker(ativo + ".SA").history(period='1wk')
         else:    
-            chamada_api = yf.Ticker("PETR4.SA").history(start = date(2020, 3, 23))
+            chamada_api = yf.Ticker(ativo + ".SA").history(start = date(2020, 3, 23))
         df_hist = pd.DataFrame(chamada_api).reset_index()
         df_hist["Symbol"] = ativo
         df_hist = df_hist[["Date","Symbol","Open","High","Low","Close","Volume","Dividends"]]
@@ -25,9 +25,10 @@ def consumer():
 
 
 
-def atualizacao_carteira():
+def atualizacao_carteira(ativo, base):
     soma_fundamentos = 0
     dividend_yield = 0
+    chamada_api = base.loc[base['SYMBOL'] == ativo]
     hist_precos = chamada_api['CLOSE']
     hist_dividendos = chamada_api['DIVIDENDS']
     hist_dividendos_ultimo_ano = hist_dividendos.loc[datetime((datetime.today().year-2),1,1):datetime((datetime.today().year-1),12,31)]
@@ -54,7 +55,7 @@ def atualizacao_carteira():
             variacao_divida = int(balanco.loc['Total Current Liabilities'][0] < balanco.loc['Total Current Liabilities'][1])
             
             soma_fundamentos = variacao_caixa + variacao_ebit + variacao_receita + variacao_divida
-            if soma_fundamentos >= 2:
+            if soma_fundamentos > 2:
                 return True
             else:
                 return False
