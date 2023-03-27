@@ -1,20 +1,3 @@
-import yfinance as yf
-import finplot as fplt
-import numpy as np
-import pandas as pd
-import mysql.connector
-conn = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  password="1234",
-  database="bolsa_valores"
-)
-cursor = conn.cursor()
-
-chamada_api = pd.read_sql('SELECT * FROM cotacao', conn)
-chamada_api = chamada_api.loc[chamada_api['SYMBOL'] == 'PETR4']
-
-
 def plot_accumulation_distribution(df, ax):
     ad = (2*df.CLOSE-df.HIGH-df.LOW) * df.VOLUME / (df.HIGH - df.LOW)
     ad.cumsum().ffill().plot(ax=ax, legend='Accum/Dist', color='#f00000')
