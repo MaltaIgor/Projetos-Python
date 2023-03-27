@@ -3,6 +3,7 @@ def plot_accumulation_distribution(df, ax):
     ad.cumsum().ffill().plot(ax=ax, legend='Accum/Dist', color='#f00000')
 
 
+
 def plot_bollinger_bands(df, ax):
     mean = df.CLOSE.rolling(20).mean()
     stddev = df.CLOSE.rolling(20).std()
@@ -13,8 +14,10 @@ def plot_bollinger_bands(df, ax):
     fplt.fill_between(p0, p1, color='#1A1C1D')
 
 
+
 def plot_ema(df, ax):
     df.CLOSE.ewm(span=9).mean().plot(ax=ax, legend='EMA',color = '#eef')
+
 
 
 def plot_rsi(df, ax):
@@ -41,11 +44,13 @@ def plot_rsi(df, ax):
     fplt.add_band(3, 97, ax=ax, color='#1A1C1D')
 
 
+
 def plot_moving_avg(df, ax):
     ma20 = df.CLOSE.rolling(20).mean()
     ma50 = df.CLOSE.rolling(50).mean()
     fplt.plot(ma20, legend = "MA-20", ax=ax)
     fplt.plot(ma50, legend = "MA-50", ax=ax)
+
 
 
 def plot_candles(df, ax):
@@ -54,11 +59,14 @@ def plot_candles(df, ax):
     daily_plot.colors.update(dict(bull_body='#bfb', bull_shadow='#ada', bear_body='#fbc', bear_shadow='#dab'))
 
 
+
 def plot_volume(df, ax):
     df_renko = chamada_api.reset_index()
     df_renko["DATE"] = pd.to_datetime(df_renko['DATE'])
     fplt.volume_ocv(df_renko[['DATE','OPEN','CLOSE','VOLUME']], ax=ax)
     fplt.plot(df_renko.VOLUME.ewm(span=24).mean(), ax=ax, color='#eef', legend='Volume')
+
+
 
 def grafico(df):
     ax,ax2,ax3,ax4 = fplt.create_plot(title='Gráfico', rows = 4, maximize=True)
@@ -75,3 +83,9 @@ def grafico(df):
     plot_moving_avg(chamada_api, ax)
     fplt.show()
 
+
+
+
+
+
+def analise_tecnica(ativo):

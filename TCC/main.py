@@ -1,6 +1,6 @@
 # IMPORTAÇÕES
 
-from consumidor import consumer, analise_tecnica
+from consumidor import consumer, analise_tecnica, atualizacao_carteira
 from relatorio import grafico
 import yfinance as yf
 import finplot as fplt
@@ -23,7 +23,7 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor()
 
-
+base = pd.read_sql('SELECT * FROM cotacao', conn)
 
 # ATUALIZAÇÃO DA BASE DE DADOS DE COTAÇÕES
 
@@ -31,17 +31,20 @@ consumer()
 
 
 
-# FORMAÇÃO DA CARTEIRA FUNDAMENTALISTA E 
+# FORMAÇÃO DA CARTEIRA FUNDAMENTALISTA
 dt = datetime.today()
-if dt == datetime.date(dt.year,6,1):
-    #atualização_carteira()
-    1
+if dt == datetime.date(dt.year,6,1) or (not os.path.exists('carteira.csv')):
+    ativos = base['SYMBOL'].values.tolist()
+    list_melhores = []
+    for ativo in ativos:
+        if atualizacao_carteira():
+            list_melhores.append(ativo)
+    pd.Series(list_melhores).to_csv('carteira.csv', index=False)
 
 
 
 # ANALISE TÉCNICA E NOTIFICAÇÃO 
 carteira = list(pd.read_csv('carteira.csv',delimiter=";"))
-base = pd.read_sql('SELECT * FROM cotacao', conn)
 for ativo in carteira:
     analise = base.loc[base['SYMBOL'] == ativo]
     if analise_tecnica(ativo):
