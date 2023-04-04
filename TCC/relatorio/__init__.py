@@ -41,7 +41,7 @@ def plot_rsi(df, ax):
     df['rsi'] = 100 - (100/(1+rs))
     df.rsi.plot(ax=ax, legend='RSI')
     fplt.set_y_range(-20, 120, ax=ax)
-    fplt.add_band(3, 97, ax=ax, color='#1A1C1D')
+    fplt.add_band(30, 70, ax=ax, color='#1A1C1D')
 
 
 

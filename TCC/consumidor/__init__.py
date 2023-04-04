@@ -6,17 +6,21 @@ def consumer():
     symbol_list_ibrx
     df_final = pd.DataFrame()
     for ativo in symbol_list_ibrx:
-        if(ativo in x):
-            chamada_api = yf.Ticker(ativo + ".SA").history(period='1wk')
-        else:    
-            chamada_api = yf.Ticker(ativo + ".SA").history(start = date(2020, 3, 23))
-        df_hist = pd.DataFrame(chamada_api).reset_index()
-        df_hist["Symbol"] = ativo
-        df_hist = df_hist[["Date","Symbol","Open","High","Low","Close","Volume","Dividends"]]
-        df_hist["Date"] = df_hist["Date"].dt.tz_convert(pytz.utc).dt.date
-        df_hist["Date"] = df_hist["Date"].astype(str)
-        df_final = pd.concat([df_hist, df_final],axis=0)
+        try:
+            if(ativo in x):
+                chamada_api = yf.Ticker(ativo + ".SA").history(period='1mo')
+            else: 
 
+                chamada_api = yf.Ticker(ativo + ".SA").history(period='1mo')
+            df_hist = pd.DataFrame(chamada_api).reset_index()
+            df_hist["Symbol"] = ativo
+            df_hist = df_hist[["Date","Symbol","Open","High","Low","Close","Volume","Dividends"]]
+            df_hist["Date"] = df_hist["Date"].dt.tz_convert(pytz.utc).dt.date
+            df_hist["Date"] = df_hist["Date"].astype(str)
+            df_final = pd.concat([df_hist, df_final],axis=0)
+            df_final = df_final.dropna(subset=["Date","Symbol","Open","High","Low","Close","Volume","Dividends"])
+        except:
+            pass
     tuplas = tuple(df_final.itertuples(index=False, name=None))
     query = "INSERT IGNORE INTO cotacao  VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     cursor.executemany(query, tuplas)
