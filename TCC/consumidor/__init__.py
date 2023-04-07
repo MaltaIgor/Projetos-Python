@@ -1,3 +1,19 @@
+import yfinance as yf
+import finplot as fplt
+import numpy as np
+import pandas as pd
+import mysql.connector
+import datetime
+import pytz
+import os 
+conn = mysql.connector.connect(
+  host= "localhost", # os.getenv('host'),
+  user="root", # os.getenv('user'),
+  password="1234", # os.getenv('password'),
+  database="bolsa_valores"
+)
+cursor = conn.cursor()
+
 def consumer():
     x = pd.read_sql("SELECT DISTINCT SYMBOL FROM cotacao", conn)
     symbol_list_ibrx = list(pd.read_csv('ibrx.csv',delimiter=";").index)

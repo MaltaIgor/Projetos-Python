@@ -31,7 +31,6 @@ base = pd.read_sql('SELECT * FROM bolsa_valores.cotacao where DATE >= DATE_SUB(C
 consumer()
 
 
-
 # FORMAÇÃO DA CARTEIRA FUNDAMENTALISTA
 dt = datetime.today()
 if datetime(dt.year,dt.month,dt.day) == datetime.date(dt.year,6,1) or (not os.path.exists('carteira.csv')):
