@@ -117,5 +117,6 @@ def analise_tecnica(chamada_api):
     vo = analise['VOLUME'] >= analise['m_vol']
     boll = (analise['boll_hi'] - analise['CLOSE']) >= ((analise['boll_lo'] - analise['CLOSE'])*2)
 
-    if rsi.astype(int) + ad.astype(int) + ma.astype(int) + vo.astype(int) + boll.astype(int) > 3:
+    resultado = (int(rsi) + int(ad) + int(ma) + int(vo) + int(boll))
+    if resultado >= 1:
         return True
