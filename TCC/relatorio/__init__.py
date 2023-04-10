@@ -53,10 +53,11 @@ def plot_volume(df, ax):
     fplt.plot(df_renko.VOLUME.ewm(span=24).mean(), ax=ax, color='#eef', legend='Volume')
 
 def grafico(df):
-    ax,ax2,ax3,ax4 = fplt.create_plot(title='Gráfico', rows = 4, maximize=True)
+    
     b = fplt.background = fplt.odd_plot_background = '#010101'
     w = fplt.foreground = '#eef'
     fplt.cross_hair_color = w+'a'
+    ax,ax2,ax3,ax4 = fplt.create_plot(title='Gráfico', rows = 4, maximize=True)
 
     plot_candles(df, ax)
     plot_volume(df, ax2)
@@ -65,19 +66,12 @@ def grafico(df):
     plot_accumulation_distribution(df, ax3)
     plot_rsi(df, ax4)
     plot_moving_avg(df, ax)
+    def save():
+        fplt.screenshot(open('grafico.png', 'wb'))
+        fplt.close()
+    fplt.timer_callback(save, 0.5, single_shot=True) # wait some until we're rendered
+
     fplt.show()
-    try:
-        fplt.screenshot('meu_grafico.png')
-        fplt.close()
-        print('Imagem salva com sucesso!')
-    except Exception as e:
-        print('Erro ao salvar a imagem')
-    finally:
-        fplt.close()
-    ax.reset()
-    ax2.reset()
-    ax3.reset()
-    ax4.reset()
 
 
 
@@ -143,6 +137,6 @@ def noti_telegram(token, chat_id, ativo):
     hoje = datetime.date.today()
     frase = f'{ativo} | {hoje} \n \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8  \n O ativo tem boas perspectivas para compra na data de hoje de acordo com os indicadores técnicos do gráfico acima \u261D \u261D \u261D '
     # Abrir a imagem que você deseja enviar
-    with open('carulini.png', 'rb') as photo:
+    with open('grafico.png', 'rb') as photo:
         # Enviar a imagem para o chat
         bot.send_photo(chat_id, photo, caption=frase)
