@@ -6,6 +6,8 @@ import mysql.connector
 import datetime
 import pytz
 import os 
+import telebot
+
 conn = mysql.connector.connect(
   host= "localhost", # os.getenv('host'),
   user="root", # os.getenv('user'),
@@ -64,6 +66,18 @@ def grafico(df):
     plot_rsi(df, ax4)
     plot_moving_avg(df, ax)
     fplt.show()
+    try:
+        fplt.screenshot('meu_grafico.png')
+        fplt.close()
+        print('Imagem salva com sucesso!')
+    except Exception as e:
+        print('Erro ao salvar a imagem')
+    finally:
+        fplt.close()
+    ax.reset()
+    ax2.reset()
+    ax3.reset()
+    ax4.reset()
 
 
 
@@ -120,3 +134,14 @@ def analise_tecnica(chamada_api):
     resultado = (int(rsi) + int(ad) + int(ma) + int(vo) + int(boll))
     if resultado >= 1:
         return True
+    
+
+
+def noti_telegram(token, chat_id):
+    # Definir o token do seu bot
+    bot = telebot.TeleBot(token)
+
+    # Abrir a imagem que você deseja enviar
+    with open('carulini.png', 'rb') as photo:
+        # Enviar a imagem para o chat
+        bot.send_photo(chat_id, photo, caption='testeeee')
