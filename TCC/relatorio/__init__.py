@@ -137,11 +137,12 @@ def analise_tecnica(chamada_api):
     
 
 
-def noti_telegram(token, chat_id):
+def noti_telegram(token, chat_id, ativo):
     # Definir o token do seu bot
     bot = telebot.TeleBot(token)
-
+    hoje = datetime.date.today()
+    frase = f'{ativo} | {hoje} \n \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8 \U0001F4B8  \n O ativo tem boas perspectivas para compra na data de hoje de acordo com os indicadores técnicos do gráfico acima \u261D \u261D \u261D '
     # Abrir a imagem que você deseja enviar
     with open('carulini.png', 'rb') as photo:
         # Enviar a imagem para o chat
-        bot.send_photo(chat_id, photo, caption='testeeee')
+        bot.send_photo(chat_id, photo, caption=frase)
