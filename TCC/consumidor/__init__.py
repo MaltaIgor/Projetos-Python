@@ -23,7 +23,7 @@ def consumer():
     df_final = pd.DataFrame()
     for ativo in symbol_list_ibrx:
         try:
-            chamada_api = yf.Ticker(ativo + ".SA").history(period='1mo')
+            chamada_api = yf.Ticker(ativo + ".SA").history(period='12mo')
             df_hist = pd.DataFrame(chamada_api).reset_index()
             df_hist["Symbol"] = ativo
             df_hist = df_hist[["Date","Symbol","Open","High","Low","Close","Volume","Dividends"]]
